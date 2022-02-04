@@ -18,6 +18,9 @@ import java.util.List;
 @Getter
 @Setter
 @DiscriminatorValue("USER")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //InheritanceType.SINGLE_TABLE Indikerer at tabeller
+// der nedarver fra denne klasse oprettes på samme tabel - alle værdier der
+// laver extend fra denne klasse er så automatisk sat som nullable
 @Table(name = "user")
 public class BaseUser implements UserWithPassword {
 
@@ -65,4 +68,19 @@ public class BaseUser implements UserWithPassword {
       roles.add(role);
    }
 
+   public String getUsername() {
+      return username;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+
+   public boolean isEnabled() {
+      return enabled;
+   }
 }
