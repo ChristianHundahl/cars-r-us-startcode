@@ -2,7 +2,6 @@ package kea.sem3.jwtdemo.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +12,7 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String brand;
+    private CarBrand brand;
     private String model;
     private double pricePrDay;
     //Liste med reservationer?
@@ -27,7 +26,7 @@ public class Car {
 
     public Car() {}
 
-    public Car(String brand, String model, double pricePrDay) {
+    public Car(CarBrand brand, String model, double pricePrDay) {
         this.brand = brand;
         this.model = model;
         this.pricePrDay = pricePrDay;
@@ -37,7 +36,7 @@ public class Car {
         return id;
     }
 
-    public String getBrand() {
+    public CarBrand getBrand() {
         return brand;
     }
 
