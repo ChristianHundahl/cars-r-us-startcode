@@ -17,15 +17,21 @@ public class CarController {
     }
 
     @GetMapping
-    public List<CarResponse> getCars(){return null;}
+    public List<CarResponse> getCars(){
+        return carService.getCars();
+    }
 
     @GetMapping("/{id}")
-    public CarResponse getCars(@PathVariable int id){return null;}
+    public CarResponse getCar(@PathVariable int id) throws Exception {
+        return carService.getCar(id, false);
+    }
 
     @PostMapping
-    public CarResponse addCar(){return null;}
+    public CarResponse addCar(@RequestBody CarRequest body){
+        return carService.addCar(body);
+    }
 
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id){return null;}
 
     @DeleteMapping("/{id}")

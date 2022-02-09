@@ -1,6 +1,7 @@
 package kea.sem3.jwtdemo.repositories;
 
 import kea.sem3.jwtdemo.entity.Car;
+import kea.sem3.jwtdemo.entity.CarBrand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ class CarRepositoryTest {
 
     @BeforeEach
     void setup() {
-        carRepository.save(new Car("Kia", "sport", 120));
-        carRepository.save(new Car("Kia", "stationcar", 240));
-        carRepository.save(new Car("Kia", "cross-country", 789));
+        carRepository.save(new Car(CarBrand.FORD, "sport", 120, 100));
+        carRepository.save(new Car(CarBrand.SUZUKI, "stationcar", 240, 192));
+        carRepository.save(new Car(CarBrand.TOYOTA, "cross-country", 789, 750));
     }
 
     @Test

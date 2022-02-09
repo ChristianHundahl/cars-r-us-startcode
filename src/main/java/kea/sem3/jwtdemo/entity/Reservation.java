@@ -22,9 +22,10 @@ public class Reservation {
     private LocalDate reservationDate;
     private LocalDate rentalDate;
 
+    //Administrative
     @CreationTimestamp
     private LocalDateTime created;
-
+    //Administrative
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 

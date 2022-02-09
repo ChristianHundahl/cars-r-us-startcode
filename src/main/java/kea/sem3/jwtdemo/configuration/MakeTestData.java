@@ -62,8 +62,12 @@ public class MakeTestData implements ApplicationRunner {
     }
 
     public void makePlainCar () {
-        Car car1 = new Car("audi", "sport", 123);
+        Car car1 = new Car(CarBrand.VOLVO, "sport", 123, 100);
+        Car car2 = new Car(CarBrand.TOYOTA, "pickup", 223, 109);
+        Car car3 = new Car(CarBrand.VOLKSWAGEN, "stationcar", 250, 200);
         carRepository.save(car1);
+        carRepository.save(car2);
+        carRepository.save(car3);
         System.out.println("Created TEST Cars");
     }
 

@@ -1,5 +1,6 @@
 package kea.sem3.jwtdemo.entity;
 
+import kea.sem3.jwtdemo.dto.CarRequest;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,21 +16,30 @@ public class Car {
     private CarBrand brand;
     private String model;
     private double pricePrDay;
+    private double bestDiscount;
     //Liste med reservationer?
 
     //Administrative
     @CreationTimestamp
     private LocalDateTime created;
-
+    //Administrative
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
     public Car() {}
 
-    public Car(CarBrand brand, String model, double pricePrDay) {
+    public Car(CarBrand brand, String model, double pricePrDay, double bestDiscount) {
         this.brand = brand;
         this.model = model;
         this.pricePrDay = pricePrDay;
+        this.bestDiscount = bestDiscount;
+    }
+
+    public Car(CarRequest body) {
+        this.brand = body.getBrand();
+        this.model = body.getModel();
+        this.pricePrDay = body.getPricePrDay();
+        this.bestDiscount = body.getBestDiscount();
     }
 
     public int getId() {
@@ -46,6 +56,10 @@ public class Car {
 
     public double getPricePrDay() {
         return pricePrDay;
+    }
+
+    public double getBestDiscount() {
+        return bestDiscount;
     }
 
     public LocalDateTime getCreated() {
