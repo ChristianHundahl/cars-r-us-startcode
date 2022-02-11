@@ -49,14 +49,6 @@ public class MakeTestData implements ApplicationRunner {
         m1.addRole(Role.USER);
         memberRepository.save(m1);
 
-        System.out.println("########################################################################################");
-        System.out.println("########################################################################################");
-        System.out.println("#################################### WARNING ! #########################################");
-        System.out.println("## This part breaks a fundamental security rule -> NEVER ship code with default users ##");
-        System.out.println("########################################################################################");
-        System.out.println("########################  REMOVE BEFORE DEPLOYMENT  ####################################");
-        System.out.println("########################################################################################");
-        System.out.println("########################################################################################");
         System.out.println("Created TEST Users");
 
     }
@@ -68,12 +60,14 @@ public class MakeTestData implements ApplicationRunner {
         carRepository.save(car1);
         carRepository.save(car2);
         carRepository.save(car3);
+
         System.out.println("Created TEST Cars");
     }
 
     public void makePlainReservation() {
         Reservation reservation1 = new Reservation(LocalDate.of(2021, 12,12), LocalDate.of(2021, 12,14));
         reservationRepository.save(reservation1);
+
         System.out.println("Created TEST Reservations");
     }
 

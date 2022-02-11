@@ -3,6 +3,7 @@ package kea.sem3.jwtdemo.entity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
@@ -20,9 +21,12 @@ public class Member extends BaseUser{
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
+    private int ranking;
+
     public Member(String username, String email, String password, String firstName, String lastName, String street, String city, int zip, boolean approved, int ranking) {
         super (username, email, password);
         this.firstName = firstName;
+        this.ranking = ranking;
     }
 
     public Member() {}
@@ -39,11 +43,8 @@ public class Member extends BaseUser{
         return lastEdited;
     }
 
-    //firstName
-    //lastName
-    //street
-    //city
-    //zip
-    //approved
-    //ranking
+    public int getRanking() {
+        return ranking;
+    }
+
 }

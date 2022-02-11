@@ -35,8 +35,8 @@ public class BaseUser implements UserWithPassword {
    // https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
    @Column(nullable = false, length = 72)
    private String password;
-
-   boolean enabled;
+   private boolean enabled;
+   private int ranking;
 
    @Enumerated(EnumType.STRING)
    @Column(columnDefinition = "ENUM('USER','ADMIN')")

@@ -70,6 +70,34 @@ public class Car {
         return lastEdited;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBrand(CarBrand brand) {
+        this.brand = brand;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setPricePrDay(double pricePrDay) {
+        this.pricePrDay = pricePrDay;
+    }
+
+    public void setBestDiscount(double bestDiscount) {
+        this.bestDiscount = bestDiscount;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public void setLastEdited(LocalDateTime lastEdited) {
+        this.lastEdited = lastEdited;
+    }
+
     @Override
     public String toString() {
         return "Car{" +

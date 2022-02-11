@@ -12,10 +12,18 @@ import java.util.List;
 public class CarController {
     CarService carService;
 
+    //TODO: CRUD for Car
     public CarController(CarService carService) {
         this.carService = carService;
     }
 
+    //Create -- ADMIN
+    @PostMapping
+    public CarResponse addCar(@RequestBody CarRequest body){
+        return carService.addCar(body);
+    }
+
+    //Read -- All user types
     @GetMapping
     public List<CarResponse> getCars(){
         return carService.getCars();
@@ -26,14 +34,13 @@ public class CarController {
         return carService.getCar(id, false);
     }
 
-    @PostMapping
-    public CarResponse addCar(@RequestBody CarRequest body){
-        return carService.addCar(body);
-    }
-
+    //Use -- ADMIN
     @PutMapping("/{id}")
     public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id){return null;}
 
+    //TODO: patch mapping
+
+    //Delete -- ADMIN
     @DeleteMapping("/{id}")
     public void deleteCar(@PathVariable int id){}
 
