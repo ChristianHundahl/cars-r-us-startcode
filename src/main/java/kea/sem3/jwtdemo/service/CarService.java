@@ -24,7 +24,7 @@ public class CarService {
     }
 
     public CarResponse getCar(int id, boolean all) throws Exception {
-        Car car = carRepository.findById(id).orElseThrow(()->new Client4xxException("No car with this id exists"));
+        Car car = carRepository.findById(id).orElseThrow(()->new Client4xxException("Not found: No car with this id exists."));
         return new CarResponse(car, false);
     }
     public CarResponse addCar(CarRequest body){
@@ -32,10 +32,19 @@ public class CarService {
         return new CarResponse(car, true);
     }
 
-    public CarResponse editCar(CarRequest body,int id){
-        return null;
+    public CarResponse editCar(CarRequest body, int id){
+        //gå til car repo
+        Car car = carRepository.findById(id).orElseThrow(()-> new Client4xxException("Not found for id=" + id));
+        car.setBestDiscount(body.getBestDiscount());
+        car.setPricePrDay(body.getPricePrDay());
+        final Car updatedCar = carRepository.save(car);
+        return new CarResponse(updatedCar, true);
     }
 
     public void deleteCar(int id) {
+        //find car by id
+        Car car = carRepository.findById(id).orElseThrow(()->new Client4xxException("Car could not be removed: No car with id" + id + " exists."));
+        //Delete car
+        carRepository.delete(car);
     }
 }

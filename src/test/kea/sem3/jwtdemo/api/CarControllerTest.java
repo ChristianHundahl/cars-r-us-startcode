@@ -50,7 +50,7 @@ class CarControllerTest {
     @BeforeEach
     public void setup() {
         carRepository.deleteAll();
-        carFordId = carRepository.save(new Car(CarBrand.VOLVO, "Focus", 400, 10)).getId();
+        carFordId = carRepository.save(new Car(CarBrand.FORD, "Focus", 700, 20)).getId();
         carSuzukiId = carRepository.save(new Car(CarBrand.SUZUKI, "Vitara", 500, 14)).getId();
     }
 
@@ -112,9 +112,28 @@ class CarControllerTest {
 
     }
 
-    @Test
-    public void editCar() throws Exception {}
+    //Disse to virker ikke endnu, men kan virke når editCar og deleteCar virker
+    @Test //Passed
+    public void editCar() throws Exception {
+        //New price and discount for the ford
+        CarRequest carToEdit = new CarRequest(CarBrand.FORD, "Focus", 500, 20);
 
-    @Test
-    void deleteCar() throws Exception {}
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/cars/" + carFordId)
+                        .contentType("application/json")
+                        .accept("application/json")
+                        .content(objectMapper.writeValueAsString(carToEdit)))
+                .andExpect(status().isOk());
+        Car editedCarFromDB = carRepository.findById(carFordId).orElse(null);
+        assertEquals(500, editedCarFromDB.getPricePrDay());
+        assertEquals(20, editedCarFromDB.getBestDiscount());
+    }
+
+    @Test //Passed
+    void deleteCar() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/cars/" + carFordId))
+                .andExpect(status().isOk());
+        //Verify that we only have one car in the database
+        assertEquals(1, carRepository.count());
+    }
+
 }

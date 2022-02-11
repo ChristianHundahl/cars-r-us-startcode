@@ -12,11 +12,11 @@ import java.util.List;
 public class CarController {
     CarService carService;
 
-    //TODO: CRUD for Car
     public CarController(CarService carService) {
         this.carService = carService;
     }
 
+    //TODO: CRUD for Car
     //Create -- ADMIN
     @PostMapping
     public CarResponse addCar(@RequestBody CarRequest body){
@@ -36,13 +36,18 @@ public class CarController {
 
     //Use -- ADMIN
     @PutMapping("/{id}")
-    public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id){return null;}
+    public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id){
+        //Find bil via id
+        //Modtag data via request
+        return carService.editCar(body, id);
+    }
 
     //TODO: patch mapping
 
     //Delete -- ADMIN
     @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable int id){}
-
+    public void deleteCar(@PathVariable int id){
+        carService.deleteCar(id);
+    }
 }
 
