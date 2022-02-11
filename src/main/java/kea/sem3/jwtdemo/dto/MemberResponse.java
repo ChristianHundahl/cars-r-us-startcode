@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberResponse {
 
+    private String username;
+    private String email;
+    private String password;
     private String firstName;
     private String lastName;
     private String street;
@@ -33,12 +36,15 @@ public class MemberResponse {
     LocalDateTime updated;
 
     public MemberResponse(Member member, boolean includeAll) {
+        this.username = member.getUsername();
         this.firstName = member.getFirstName();
         this.lastName = member.getLastName();
         this.street = member.getStreet();
         this.city = member.getCity();
         this.zip = member.getZip();
         if(includeAll) {
+            this.email = member.getEmail();
+            this.password = member.getPassword();
             this.approved = member.isApproved();
             this.ranking = member.getRanking();
         }

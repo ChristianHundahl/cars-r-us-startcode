@@ -32,6 +32,9 @@ public class Member extends BaseUser{
 
     public Member(String username, String email, String password, String firstName, String lastName, String street, String city, int zip, boolean approved, int ranking) {
         super (username, email, password);
+        this.setUsername(username);
+        this.setEmail(email);
+        this.setPassword(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
