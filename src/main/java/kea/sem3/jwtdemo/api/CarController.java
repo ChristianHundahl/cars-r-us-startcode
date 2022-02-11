@@ -34,7 +34,7 @@ public class CarController {
         return carService.getCar(id, false);
     }
 
-    //Use -- ADMIN
+    //Update -- ADMIN
     @PutMapping("/{id}")
     public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id){
         //Find bil via id
