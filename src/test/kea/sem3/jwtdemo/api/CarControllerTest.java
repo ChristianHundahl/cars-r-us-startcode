@@ -26,13 +26,13 @@ import static org.hamcrest.Matchers.*;
 
 
 /*Denne gør at vi kan få en fuld applications test
-Når Lars siger byggeservere, referr han til githubAction
+Når Lars siger byggeservere, refererer han til githubAction
 Denne annotation kører alle annotationer*/
 @SpringBootTest
 
 @AutoConfigureMockMvc
-/*referer til @Profile("!test") (som ligger i MakeTestData), som altså fortæller at vi ønkser at få
-data fra denne klass med ober i denne test */
+/*referer til @Profile("!test") (som ligger i MakeTestData), som altså fortæller at vi ønsker at få
+data fra denne klasse med over i denne test */
 @ActiveProfiles("test")
 class CarControllerTest {
 
@@ -54,11 +54,11 @@ class CarControllerTest {
         carSuzukiId = carRepository.save(new Car(CarBrand.SUZUKI, "Vitara", 500, 14)).getId();
     }
 
-    @Test
+    @Test //Passed
     void getCars() {
     }
 
-    @Test
+    @Test //Passed
     public void testCarById() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -66,11 +66,11 @@ class CarControllerTest {
                         .get("/api/cars/" + carFordId)
                         .accept(MediaType.APPLICATION_JSON))
 
-                /*.andDo(print()): denne metode bruges til at printe ens fejl, goa at bruge til at idenficere fejl,
-                men hvsi alt kører er den overløfdig. Den printer returværierne, som er blebvet omformet til json*/
-                /*Her sker repsonse*/
+                /*.andDo(print()): denne metode bruges til at printe ens fejl for lettere at identificere fejlen,
+                men hvis alt kører er den overflødig. Den printer returværdierne, som er blevet omformet til json*/
+                /*Her sker response*/
                 .andExpect(status().isOk())
-                /*jsonPath, parser respoonse som json*/
+                /*jsonPath, parser respons som json*/
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(carFordId))
 
@@ -78,7 +78,7 @@ class CarControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.model").value("Focus"));
     }
 
-    @Test
+    @Test //Passed
     public void testAllCars() throws Exception {
         String model = "$[?(@.model == '%s')]";
         mockMvc.perform(MockMvcRequestBuilders
@@ -97,7 +97,7 @@ class CarControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(containsString("Vitara")));
     }
 
-    @Test
+    @Test //Passed
     public void testAddCar() throws Exception {
         CarRequest newCar = new CarRequest(CarBrand.VOLKSWAGEN, "Polo", 200, 10);
         System.out.println("xxxxxx"+objectMapper.writeValueAsString(newCar));
@@ -112,7 +112,6 @@ class CarControllerTest {
 
     }
 
-    //Disse to virker ikke endnu, men kan virke når editCar og deleteCar virker
     @Test //Passed
     public void editCar() throws Exception {
         //New price and discount for the ford
