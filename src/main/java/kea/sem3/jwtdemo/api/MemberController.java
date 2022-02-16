@@ -1,13 +1,11 @@
 package kea.sem3.jwtdemo.api;
 
 import kea.sem3.jwtdemo.dto.CarResponse;
+import kea.sem3.jwtdemo.dto.MemberRequest;
 import kea.sem3.jwtdemo.dto.MemberResponse;
 import kea.sem3.jwtdemo.service.CarService;
 import kea.sem3.jwtdemo.service.MemberService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +18,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    //TODO: CRUD for member
+    //TODO: Create
+    @PostMapping
+    public MemberResponse addMember(@RequestBody MemberRequest body) {
+        return memberService.addMember(body);
+    }
+
     //Read -- All user types
     @GetMapping
     public List<MemberResponse> getMembers(){
@@ -28,8 +31,20 @@ public class MemberController {
     }
 
     @GetMapping("/{username}")
-    public MemberResponse getMember(@PathVariable String username) throws Exception {
+    public MemberResponse getMember(@PathVariable String username) {
         return memberService.getMember(username, false);
+    }
+
+    //Update -- USER, ADMIN
+    @PutMapping("/{username}")
+    public MemberResponse editMember(@RequestBody MemberRequest body, @PathVariable String username) {
+        return memberService.editMember(body, username);
+    }
+
+    //Delete -- ADMIN
+    @DeleteMapping("/{username}")
+    public void deleteMember(@PathVariable String username) {
+        memberService.deleteMember(username);
     }
 
 }

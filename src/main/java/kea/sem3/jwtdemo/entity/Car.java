@@ -6,7 +6,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Car {
@@ -26,6 +28,9 @@ public class Car {
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
+    @OneToMany(mappedBy = "car")
+    private Set<Reservation> reservations = new HashSet<>();
+
     public Car() {}
 
     public Car(CarBrand brand, String model, double pricePrDay, double bestDiscount) {
@@ -40,6 +45,10 @@ public class Car {
         this.model = body.getModel();
         this.pricePrDay = body.getPricePrDay();
         this.bestDiscount = body.getBestDiscount();
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
     }
 
     public int getId() {

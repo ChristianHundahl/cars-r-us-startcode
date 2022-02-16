@@ -1,22 +1,26 @@
 package kea.sem3.jwtdemo.entity;
 
-import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Reservation {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Id
-    int id;
+    private int reservationId;
 
-    //Mappe en reservation til en bil hvordan?
+    //TODO: Car klassen addReservation
+    //TODO: Member klassen addReservation
+    @ManyToOne
+    private Car car;
+
+    @ManyToOne
+    private Member member;
 
     //Når klient reserverer bil -> modtager datatype om reservationsdato
     private LocalDate reservationDate;
@@ -36,8 +40,24 @@ public class Reservation {
         this.rentalDate = rentalDate;
     }
 
-    public int getId() {
-        return id;
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public int getReservationId() {
+        return reservationId;
     }
 
     public LocalDate getReservationDate() {
@@ -59,7 +79,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "id=" + id +
+                "id=" + reservationId +
                 ", reservationDate=" + reservationDate +
                 ", rentalDate=" + rentalDate +
                 ", created=" + created +
@@ -72,11 +92,11 @@ public class Reservation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return id == that.id && Objects.equals(reservationDate, that.reservationDate) && Objects.equals(rentalDate, that.rentalDate) && Objects.equals(created, that.created) && Objects.equals(lastEdited, that.lastEdited);
+        return reservationId == that.reservationId && Objects.equals(reservationDate, that.reservationDate) && Objects.equals(rentalDate, that.rentalDate) && Objects.equals(created, that.created) && Objects.equals(lastEdited, that.lastEdited);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, reservationDate, rentalDate, created, lastEdited);
+        return Objects.hash(reservationId, reservationDate, rentalDate, created, lastEdited);
     }
 }

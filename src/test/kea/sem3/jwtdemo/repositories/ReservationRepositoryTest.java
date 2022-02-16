@@ -1,6 +1,5 @@
 package kea.sem3.jwtdemo.repositories;
 
-import kea.sem3.jwtdemo.entity.Member;
 import kea.sem3.jwtdemo.entity.Reservation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ class ReservationRepositoryTest {
     @Test
     public void findByReservationId() {
         Reservation found = reservationRepository.getById(1);
-        assertNotEquals(0, found.getId());
+        assertNotEquals(0, found.getReservationId());
     }
 
 }
