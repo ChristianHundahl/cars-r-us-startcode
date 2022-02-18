@@ -41,8 +41,8 @@ class MemberControllerTest {
     @BeforeEach
     public void setup() {
         memberRepository.deleteAll();
-        id1 = memberRepository.save(new Member("username", "email@mail.dk", "String password", "String firstName", "String lastName", "String street", "String city", 1234, true, 1)).getUsername();
-        id2 = memberRepository.save(new Member("username2", "email@mail.dk", "String password2", "String firstName2", "String lastName2", "String street2", "String city2", 1234, true, 1)).getUsername();
+        id1 = memberRepository.save(new Member("username1", "email1@mail.dk", "String password", "String firstName", "String lastName", "String street", "String city", 1234, true, 1)).getUsername();
+        id2 = memberRepository.save(new Member("username2", "email2@mail.dk", "String password2", "String firstName2", "String lastName2", "String street2", "String city2", 1234, true, 1)).getUsername();
     }
 
     @Test
