@@ -12,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import javax.transaction.Transactional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -19,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 Når Lars siger byggeservere, refererer han til githubAction
 Denne annotation kører alle annotationer*/
 @SpringBootTest
-
+@Transactional
 @AutoConfigureMockMvc
 /*referer til @Profile("!test") (som ligger i MakeTestData), som altså fortæller at vi ønsker at få
 data fra denne klasse med over i denne test */
@@ -39,8 +41,8 @@ class MemberControllerTest {
     @BeforeEach
     public void setup() {
         memberRepository.deleteAll();
-        id1 = memberRepository.save(new Member("String username", "String email", "String password", "String firstName", "String lastName", "String street", "String city", 1234, true, 1)).getUsername();
-        id2 = memberRepository.save(new Member("String username2", "String email2", "String password2", "String firstName2", "String lastName2", "String street2", "String city2", 1234, true, 1)).getUsername();
+        id1 = memberRepository.save(new Member("username", "email@mail.dk", "String password", "String firstName", "String lastName", "String street", "String city", 1234, true, 1)).getUsername();
+        id2 = memberRepository.save(new Member("username2", "email@mail.dk", "String password2", "String firstName2", "String lastName2", "String street2", "String city2", 1234, true, 1)).getUsername();
     }
 
     @Test
@@ -49,8 +51,9 @@ class MemberControllerTest {
 
     @Test
     void deleteMember() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/members" + id1))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/members/username"))
                 .andExpect(status().isOk());
+        System.out.println(memberRepository.count());
         assertEquals(1, memberRepository.count());
     }
 }

@@ -55,7 +55,7 @@ public class MakeTestData implements ApplicationRunner {
         memberRepository.save(m2);
         memberRepository.save(m3);
 
-        System.out.println("Created TEST Users");
+        System.out.println("Created " + memberRepository.count() + " TEST Users");
 
     }
 
@@ -67,14 +67,18 @@ public class MakeTestData implements ApplicationRunner {
         carRepository.save(car2);
         carRepository.save(car3);
 
-        System.out.println("Created TEST Cars");
+        System.out.println("Created " + carRepository.count() + " TEST Cars");
     }
 
     public void makePlainReservation() {
-        Reservation reservation1 = new Reservation(LocalDate.of(2021, 12,12), LocalDate.of(2021, 12,14));
+        Car car1 = new Car(CarBrand.VOLVO, "sport", 123, 100);
+        Member m1 = new Member("test1", "test1@mail.dk", "password", "A", "A", "test123", "xxx", 1234, true, 1);
+        memberRepository.save(m1);
+        carRepository.save(car1);
+        Reservation reservation1 = new Reservation(LocalDate.of(2021, 12,14), car1, m1);
         reservationRepository.save(reservation1);
 
-        System.out.println("Created TEST Reservations");
+        System.out.println("Created " + reservationRepository.count() + " TEST Reservations");
     }
 
     @Override

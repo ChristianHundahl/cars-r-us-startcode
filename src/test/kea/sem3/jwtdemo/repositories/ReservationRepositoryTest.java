@@ -17,12 +17,12 @@ class ReservationRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        Reservation r1 = new Reservation(LocalDate.of(2021, 12,12), LocalDate.of(2021, 12,14));
-        Reservation r2 = new Reservation(LocalDate.of(2021, 12,12), LocalDate.of(2021, 12,14));
-        Reservation r3 = new Reservation(LocalDate.of(2021, 12,12), LocalDate.of(2021, 12,14));
+        /*Reservation r1 = new Reservation(LocalDate.of(2021, 12,14));
+        Reservation r2 = new Reservation(LocalDate.of(2021, 12,14));
+        Reservation r3 = new Reservation(LocalDate.of(2021, 12,14));
         reservationRepository.save(r1);
         reservationRepository.save(r2);
-        reservationRepository.save(r3);
+        reservationRepository.save(r3);*/
 
     }
 

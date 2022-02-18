@@ -4,10 +4,7 @@ import kea.sem3.jwtdemo.dto.MemberRequest;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -32,8 +29,12 @@ public class Member extends BaseUser{
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
-    @OneToMany(mappedBy = "member")//One member can have many reservations
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)//One member can have many reservations
     private Set<Reservation> reservations = new HashSet<>();
+
+    public void addReservations(Reservation reservation) {
+        reservations.add(reservation);
+    };
 
     public Member(String username, String email, String password, String firstName, String lastName, String street, String city, int zip, boolean approved, int ranking) {
         super (username, email, password);

@@ -17,35 +17,38 @@ public class Reservation {
     //TODO: Car klassen addReservation
     //TODO: Member klassen addReservation
     @ManyToOne
-    private Car car;
+    private Car reservedCar;
 
     @ManyToOne
     private Member member;
 
-    //Når klient reserverer bil -> modtager datatype om reservationsdato
-    private LocalDate reservationDate;
-    private LocalDate rentalDate;
-
     //Administrative
-    @CreationTimestamp
-    private LocalDateTime created;
+
     //Administrative
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
+    //Når klient reserverer bil -> modtager datatype om reservationsdato
+    @CreationTimestamp
+    private LocalDate reservationDate;
+    private LocalDate rentalDate;
+
     public Reservation() {}
 
-    public Reservation(LocalDate reservationDate, LocalDate rentalDate) {
-        this.reservationDate = reservationDate;
+    public Reservation(LocalDate rentalDate, Car reservedCar, Member member) {
         this.rentalDate = rentalDate;
+        this.reservedCar = reservedCar;
+        this.member = member;
+        reservedCar.addReservations(this);
+        member.addReservations(this);
     }
 
-    public Car getCar() {
-        return car;
+    public Car getReservedCar() {
+        return reservedCar;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setReservedCar(Car car) {
+        this.reservedCar = car;
     }
 
     public Member getMember() {
@@ -68,9 +71,7 @@ public class Reservation {
         return rentalDate;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
+
 
     public LocalDateTime getLastEdited() {
         return lastEdited;
@@ -82,21 +83,10 @@ public class Reservation {
                 "id=" + reservationId +
                 ", reservationDate=" + reservationDate +
                 ", rentalDate=" + rentalDate +
-                ", created=" + created +
                 ", lastEdited=" + lastEdited +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reservation that = (Reservation) o;
-        return reservationId == that.reservationId && Objects.equals(reservationDate, that.reservationDate) && Objects.equals(rentalDate, that.rentalDate) && Objects.equals(created, that.created) && Objects.equals(lastEdited, that.lastEdited);
-    }
+   }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(reservationId, reservationDate, rentalDate, created, lastEdited);
-    }
-}
+

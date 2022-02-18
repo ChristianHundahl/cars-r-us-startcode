@@ -28,8 +28,12 @@ public class Car {
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
-    @OneToMany(mappedBy = "car")
+    @OneToMany(mappedBy = "reservedCar", fetch = FetchType.EAGER)
     private Set<Reservation> reservations = new HashSet<>();
+
+    public void addReservations(Reservation reservation) {
+        reservations.add(reservation);
+    }
 
     public Car() {}
 

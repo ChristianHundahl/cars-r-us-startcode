@@ -43,6 +43,10 @@ public class CarController {
     }
 
     //TODO: patch mapping
+    @PatchMapping("/{id}/{newPrice}")
+    public void updateCarPrice(@PathVariable int id, @PathVariable double newPrice) {
+        carService.updateCarPrice(id, newPrice);
+    }
 
     //Delete -- ADMIN
     @DeleteMapping("/{id}")

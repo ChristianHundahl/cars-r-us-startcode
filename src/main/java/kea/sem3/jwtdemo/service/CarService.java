@@ -32,13 +32,23 @@ public class CarService {
         return new CarResponse(car, true);
     }
 
+    //PUT mapping
     public CarResponse editCar(CarRequest body, int id){
         //gå til car repo
-        Car car = carRepository.findById(id).orElseThrow(()-> new Client4xxException("Not found for id=" + id));
+        Car car = carRepository.findById(id).orElseThrow(()-> new Client4xxException("No car found for id=" + id));
+        car.setBrand(body.getBrand());
+        car.setModel(body.getModel());
         car.setBestDiscount(body.getBestDiscount());
         car.setPricePrDay(body.getPricePrDay());
-        final Car updatedCar = carRepository.save(car);
-        return new CarResponse(updatedCar, true);
+        //final Car updatedCar = carRepository.save(car);
+        return new CarResponse(carRepository.save(car), true);
+    }
+
+    //PATCH mapping
+    public void updateCarPrice(int id, double newPrice) {
+        Car car = carRepository.findById(id).orElseThrow(()->new Client4xxException("Car could not be removed: No car with id" + id + " exists."));
+        car.setPricePrDay(newPrice);
+        carRepository.save(car);
     }
 
     public void deleteCar(int id) {

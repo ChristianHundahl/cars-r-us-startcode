@@ -18,7 +18,6 @@ public class MemberService {
     }
 
     //CRUD
-
     //Create
     public MemberResponse addMember(MemberRequest body) {
         Member member = memberRepository.save(new Member(body));
@@ -43,8 +42,8 @@ public class MemberService {
         member.setPassword((body.getPassword()));
         //TODO: Change username -> username is id - how to handle?
         // member.setUsername((body.getUsername()));
-        final Member updatedMember = memberRepository.save(member);
-        return new MemberResponse(updatedMember, false);
+        //final Member updatedMember = memberRepository.save(member);
+        return new MemberResponse(memberRepository.save(member), false);
     }
 
     //Delete

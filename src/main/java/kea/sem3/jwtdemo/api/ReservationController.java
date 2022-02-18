@@ -17,11 +17,8 @@ public class ReservationController {
     MemberService memberService;
     CarService carService;
 
-    public ReservationController(ReservationService reservationService,
-    MemberService memberService, CarService carService){
+    public ReservationController(ReservationService reservationService){
         this.reservationService = reservationService;
-        this.memberService = memberService;
-        this.carService = carService;
     }
 
     @PutMapping("/{username}/reservations/{carId}")

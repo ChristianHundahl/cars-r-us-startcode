@@ -28,14 +28,14 @@ public class ReservationService {
     //Make easier by create ReservationResponse + ReservationsRequest
     //--> method takes ReservationRequest body, gets all necessary info from there
     public ReservationResponse createReservation(ReservationRequest body, int carId, String username) {
-        Reservation reservation = new Reservation(body.getRentalDate(), body.getReservationDate());
+        Reservation reservation = new Reservation(body.getRentalDate(), body.getReservedCar(), body.getMember());
 
         //Find needed car, member form database
         Car car = carRepository.findById(carId).orElseThrow();
         Member member = memberRepository.findById(username).orElseThrow();
 
         //Set needed fields in reservation
-        reservation.setCar(car);
+        reservation.setReservedCar(car);
         reservation.setMember(member);
 
         //Add reservation to car, member
