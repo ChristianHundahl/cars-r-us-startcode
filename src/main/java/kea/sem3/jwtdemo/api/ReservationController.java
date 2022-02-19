@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/reservations")
 public class ReservationController {
     ReservationService reservationService;
-    MemberService memberService;
-    CarService carService;
 
     public ReservationController(ReservationService reservationService){
         this.reservationService = reservationService;
@@ -25,8 +23,7 @@ public class ReservationController {
     public ReservationResponse createReservation(@RequestBody ReservationRequest body, @PathVariable String username, @PathVariable int carId){
         //Find bil, bruger via id
         //Modtag data via request
-        //return reservationService.createReservation(body, carId, username);
-
+        return reservationService.createReservation(body, carId, username);
     }
 
 

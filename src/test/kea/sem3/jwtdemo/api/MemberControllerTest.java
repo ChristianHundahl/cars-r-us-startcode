@@ -73,6 +73,6 @@ class MemberControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").exists());
         //Verify that it actually ended in the database
         //assertEquals(3, memberRepository.count());
-        assertEquals(2, memberRepository.count());
+        assertEquals(3, memberRepository.count());
     }
 }
