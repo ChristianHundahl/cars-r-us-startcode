@@ -1,7 +1,11 @@
 package kea.sem3.jwtdemo.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kea.sem3.jwtdemo.dto.CarRequest;
+import kea.sem3.jwtdemo.dto.MemberRequest;
+import kea.sem3.jwtdemo.entity.CarBrand;
 import kea.sem3.jwtdemo.entity.Member;
+import kea.sem3.jwtdemo.entity.Role;
 import kea.sem3.jwtdemo.repositories.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
 
@@ -51,9 +56,23 @@ class MemberControllerTest {
 
     @Test
     void deleteMember() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/members/username"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/members/" + id1))
                 .andExpect(status().isOk());
         System.out.println(memberRepository.count());
         assertEquals(1, memberRepository.count());
+    }
+
+    @Test
+    void addMember() throws Exception {
+        MemberRequest newMember = new MemberRequest(Role.USER, "username3", "email3@mail.dk", true, "password3", 1, "Test", "Tester", "Test street", "Testtown", 1111);
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/members")
+                        .contentType("application/json")
+                        .accept("application/json")
+                        .content(objectMapper.writeValueAsString(newMember)))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").exists());
+        //Verify that it actually ended in the database
+        //assertEquals(3, memberRepository.count());
+        assertEquals(2, memberRepository.count());
     }
 }

@@ -18,31 +18,27 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    //TODO: Create
-    @PostMapping
+    @PostMapping    //Create -- ADMIN (for now - potentially all users in a real system)
     public MemberResponse addMember(@RequestBody MemberRequest body) {
         return memberService.addMember(body);
     }
 
-    //Read -- All user types
-    @GetMapping
+    @GetMapping     //Read -- All user types
     public List<MemberResponse> getMembers(){
         return memberService.getMembers();
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/{username}")  //Read -- All user types
     public MemberResponse getMember(@PathVariable String username) {
         return memberService.getMember(username, false);
     }
 
-    //Update -- USER, ADMIN
-    @PutMapping("/{username}")
+    @PutMapping("/{username}")  //Update -- USER, ADMIN
     public MemberResponse editMember(@RequestBody MemberRequest body, @PathVariable String username) {
         return memberService.editMember(body, username);
     }
 
-    //Delete -- ADMIN
-    @DeleteMapping("/{username}")
+    @DeleteMapping("/{username}")   //Delete -- ADMIN
     public void deleteMember(@PathVariable String username) {
         memberService.deleteMember(username);
     }

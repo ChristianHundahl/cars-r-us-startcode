@@ -14,8 +14,6 @@ public class Reservation {
     @Id
     private int reservationId;
 
-    //TODO: Car klassen addReservation
-    //TODO: Member klassen addReservation
     @ManyToOne
     private Car reservedCar;
 
@@ -71,8 +69,6 @@ public class Reservation {
         return rentalDate;
     }
 
-
-
     public LocalDateTime getLastEdited() {
         return lastEdited;
     }
@@ -81,9 +77,9 @@ public class Reservation {
     public String toString() {
         return "Reservation{" +
                 "id=" + reservationId +
-                ", reservationDate=" + reservationDate +
-                ", rentalDate=" + rentalDate +
-                ", lastEdited=" + lastEdited +
+                ", reservation date=" + reservationDate +
+                ", rental date=" + rentalDate +
+                ", reserved car=" + reservedCar +
                 '}';
     }
 
