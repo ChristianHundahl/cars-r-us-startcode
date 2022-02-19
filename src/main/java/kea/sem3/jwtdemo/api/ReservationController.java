@@ -25,9 +25,9 @@ public class ReservationController {
     public ReservationResponse createReservation(@RequestBody ReservationRequest body, @PathVariable String username, @PathVariable int carId){
         //Find bil, bruger via id
         //Modtag data via request
-        return reservationService.createReservation(body, carId, username);
+        //return reservationService.createReservation(body, carId, username);
+
     }
-    //When reservation created:
-    //Car.add(this)
-    //Member.add(this)
+
+
 }
