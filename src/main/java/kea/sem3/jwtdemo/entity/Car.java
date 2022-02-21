@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+@Entity //Change name of table by adding (name = "bil") to entity annotation
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -117,9 +117,9 @@ public class Car {
                 "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
-                ", pricePrDay=" + pricePrDay +
-                ", created=" + created +
-                ", lastEdited=" + lastEdited +
+                ", pricePrDay=" + pricePrDay + '\'' +
+                ", created=" + created +'\'' +
+                ", lastEdited=" + lastEdited + '\'' +
                 '}';
     }
 

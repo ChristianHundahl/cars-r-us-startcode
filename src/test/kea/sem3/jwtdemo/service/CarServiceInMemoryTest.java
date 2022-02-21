@@ -17,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
+@DataJpaTest //Bruger automatisk H2 database, lader GitHub actions køre testen uden database sat op
 class CarServiceInMemoryTest {
     @Autowired
     CarRepository carRepository;

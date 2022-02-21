@@ -11,15 +11,22 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@DiscriminatorValue("Member")
+@DiscriminatorValue("Member") //For explanation of @DiscriminatorValue, see: https://stackoverflow.com/questions/16772370/when-to-use-discriminatorvalue-annotation-in-hibernate
 public class Member extends BaseUser{
 
+    @Column
     private String firstName;
+    @Column
     private String lastName;
+    @Column
     private String street;
+    @Column
     private String city;
+    @Column
     private int zip;
+    @Column
     private boolean approved;
+    @Column
     private int ranking;
 
     //Administrative
@@ -35,7 +42,7 @@ public class Member extends BaseUser{
     public void addReservations(Reservation reservation) {
         reservations.add(reservation);
     };
-
+    //TODO: test om @AllArgsConstructor kan bruges til nedarvede klasser
     public Member(String username, String email, String password, String firstName, String lastName, String street, String city, int zip, boolean approved, int ranking) {
         super (username, email, password);
         this.setUsername(username);
