@@ -64,7 +64,7 @@ class CarControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                         /*De to linjer, er requestet*/
                         .get("/api/cars/" + carFordId)
-                        .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))//Enum showing accepted type -- see memberController
 
                 /*.andDo(print()): denne metode bruges til at printe ens fejl for lettere at identificere fejlen,
                 men hvis alt kører er den overflødig. Den printer returværdierne, som er blevet omformet til json*/

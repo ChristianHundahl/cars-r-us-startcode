@@ -67,7 +67,7 @@ class MemberControllerTest {
         MemberRequest newMember = new MemberRequest(Role.USER, "username3", "email3@mail.dk", true, "password3", 1, "Test", "Tester", "Test street", "Testtown", 1111);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/members")
                         .contentType("application/json")
-                        .accept("application/json")
+                        .accept("application/json")//String showing accepted type -- see CarController
                         .content(objectMapper.writeValueAsString(newMember)))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").exists());

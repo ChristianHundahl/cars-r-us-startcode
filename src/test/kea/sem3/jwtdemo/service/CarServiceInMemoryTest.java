@@ -50,8 +50,7 @@ class CarServiceInMemoryTest {
     @Test
     void getCar() throws Exception {
         CarResponse carResponse = carService.getCar(1, false);
-        CarBrand carbrand = CarBrand.VOLVO;
-        assertEquals(carbrand, carResponse.getBrand());
+        assertEquals(CarBrand.VOLVO, carResponse.getBrand());
     }
 
     @Test
